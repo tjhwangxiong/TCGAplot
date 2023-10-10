@@ -50,9 +50,6 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 biocViews: 
-    Pathway,
-    Survival,
-    Visualization,
     Software
 BugReports: https://github.com/tjhwangxiong/TCGAplot/issues
 Config/testthat/edition: 3
