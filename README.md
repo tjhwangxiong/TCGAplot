@@ -1,7 +1,10 @@
 
 # TCGAplot
+
 **author:** Xiong Wang
+
 **email:** wangxiong@tjh.tjmu.edu.cn
+
 **affiliation:** Department of Laboratory Medicine, Tongji Hospital, Tongji Medical College, HUST
 
 # 1. Introduction
