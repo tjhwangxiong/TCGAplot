@@ -1,30 +1,8 @@
----
-title: "TCGAplot"
-author:
-  name: Xiong Wang
-  email: wangxiong@tjh.tjmu.edu.cn
-  affiliation: Department of Laboratory Medicine, Tongji Hospital, Tongji Medical College, HUST
-output:
-  rmarkdown::html_vignette:
-    fig_width: 8
-    fig_height: 5
-  
-  BiocStyle::html_document:
-    toc: TRUE
-    toc_float: TRUE
-    toc_depth: 3
-vignette: >
-  %\VignetteIndexEntry{TCGAplot}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
 
-
-
-
-```r
-library(TCGAplot)
-```
+# TCGAplot
+**author:** Xiong Wang
+**email:** wangxiong@tjh.tjmu.edu.cn
+**affiliation:** Department of Laboratory Medicine, Tongji Hospital, Tongji Medical College, HUST
 
 # 1. Introduction
 
