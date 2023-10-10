@@ -1,6 +1,6 @@
 # TCGAplot
 
-**author: ** Xiong Wang
+**author:** Xiong Wang
 
 **email:** wangxiong@tjh.tjmu.edu.cn
 
