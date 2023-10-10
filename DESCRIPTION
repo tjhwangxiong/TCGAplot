@@ -1,0 +1,63 @@
+Package: TCGAplot
+Type: Package
+Title: Pan-cancer multi-omics integrated analysis and visualization
+Version: 0.99.0
+Description: TCGA pan-cancer multi-omics data were integrated and included in this package, including gene expression TPM (transcripts per million) matrix,
+    TMB (tumor mutational burden), MSI (microsatellite instability), immune cell ratio, immune score, promoter methylation, and clinical information.
+    A number of functions were generated to perform pan-cancer paired/unpaired differential gene expression analysis, pan-cancer correlation analsys between
+    gene expression and TMB, MSI, immune cell ratio, immune score,immune stimulator,immune inhibitor, and promoter methylation. Methods for visualization
+    were provided, including paired/unpaired boxplot, survival plot, ROC curve, heatmap, scatter, radar chart, and forest plot, 
+    in order to easily perform integrative pan-cancer multi-omics analysis.
+Authors@R: person("Xiong", "Wang",
+    email="wangxiong@tjh.tjmu.edu.cn",
+    role=c("aut","cre"),
+    comment = c(ORCID = "0000-0002-4588-1898"))
+Maintainer: Xiong Wang <wangxiong@tjh.tjmu.edu.cn>
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: false
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 2.10),
+    ggpubr (>= 0.6.0),
+Imports:
+    tinyarray,
+    tibble,
+    magrittr,
+    dplyr,
+    ggplot2,
+    stringr,
+    reshape2,
+    psych,
+    limma,
+    edgeR,
+    org.Hs.eg.db,
+    clusterProfiler,
+    enrichplot,
+    circlize,
+    grid,
+    fmsb,
+    survival,
+    survminer,
+    forestplot,
+    pROC,
+    patchwork,
+    ComplexHeatmap
+Suggests: 
+    BiocStyle,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+biocViews: 
+    PancancerDifferentialExpression,
+    GeneExpressionMethylationCorrelation,
+    GeneExpressionImmuneCorrelation,
+    GeneExpressionTMBCorrelation,
+    GeneExpressionMSICorrelation,
+    Pathway,
+    Survival,
+    Visualization,
+    Software
+BugReports: https://github.com/tjhwangxiong/TCGAplot/issues
+Config/testthat/edition: 3
