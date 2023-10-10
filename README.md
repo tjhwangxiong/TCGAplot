@@ -59,7 +59,7 @@ legend position. Allowed values include "top","bottom","left","right" and "none"
 ```r
 pan_boxplot("KLF7")
 ```
-![Pan-cancer box plot of KLF7](./vignettes/1.jpg){width=90%}
+![Pan-cancer box plot of KLF7](./vignettes/1.jpg)
 
 ### 3.1.2 Pan-cancer paired tumor-normal boxplot
 
@@ -92,7 +92,7 @@ legend position. Allowed values include "top","bottom","left","right" and "none"
 ```r
 pan_paired_boxplot("KLF7")
 ```
-![Pan-cancer paired box plot of KLF7](./vignettes/2.jpg){width=90%}
+![Pan-cancer paired box plot of KLF7](./vignettes/2.jpg)
 
 ## 3.2 Pan-cancer correlation analysis
 
@@ -123,7 +123,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 gene_TMB_radar("KLF7")
 ```
-![KLF7 and TMB correlation](./vignettes/3.jpg){width=90%}
+![KLF7 and TMB correlation](./vignettes/3.jpg)
 
 ### 3.2.2 Pan-cancer gene expression and MSI correlation radar chart
 
@@ -150,7 +150,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 gene_MSI_radar("KLF7")
 ```
-![KLF7 and MSI correlation](./vignettes/4.jpg){width=90%}
+![KLF7 and MSI correlation](./vignettes/4.jpg)
 
 ### 3.2.3 Pan-cancer gene expression and immune-related genes correlation
 
@@ -183,7 +183,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 gene_checkpoint_heatmap("KLF7")
 ```
-![KLF7 and ICGs correlation](./vignettes/5.jpg){width=90%}
+![KLF7 and ICGs correlation](./vignettes/5.jpg)
 
 ### 3.2.3.2 Pan-cancer gene expression and chemokine correlation
 
@@ -214,7 +214,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 gene_chemokine_heatmap("KLF7")
 ```
-![KLF7 and chemokine correlatoin](./vignettes/6.jpg){width=90%}
+![KLF7 and chemokine correlatoin](./vignettes/6.jpg)
 
 ### 3.2.3.3 Pan-cancer gene expression and chemokine receptor correlation
 
@@ -245,7 +245,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 gene_receptor_heatmap("KLF7")
 ```
-![KLF7 and chemokine receptor correlation](./vignettes/7.jpg){width=90%}
+![KLF7 and chemokine receptor correlation](./vignettes/7.jpg)
 
 ### 3.2.3.4 Pan-cancer gene expression and immune stimulator correlation
 
@@ -276,7 +276,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 gene_immustimulator_heatmap("KLF7")
 ```
-![KLF7 and immune stimulator correlation](./vignettes/8.jpg){width=90%}
+![KLF7 and immune stimulator correlation](./vignettes/8.jpg)
 
 ### 3.2.3.5 Pan-cancer gene expression and immune inhibitor correlation
 
@@ -307,7 +307,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 gene_immuinhibitor_heatmap("KLF7")
 ```
-![KLF7 and immune inhibitor correlation](./vignettes/9.jpg){width=90%}
+![KLF7 and immune inhibitor correlation](./vignettes/9.jpg)
 
 ### 3.2.4 Pan-cancer gene expression and immune infiltration correlation
 
@@ -338,7 +338,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 gene_immucell_heatmap("KLF7")
 ```
-![KLF7 and immune cell ratio correlation](./vignettes/10.jpg){width=90%}
+![KLF7 and immune cell ratio correlation](./vignettes/10.jpg)
 
 ### 3.2.4.2 Pan-cancer gene expression and immune score correlation
 
@@ -367,7 +367,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 gene_immunescore_heatmap("KLF7")
 ```
-![KLF7 and immune score correlation heatmap](./vignettes/11.jpg){width=90%}
+![KLF7 and immune score correlation heatmap](./vignettes/11.jpg)
 
 #### `gene_immunescore_triangle`
 
@@ -394,7 +394,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 gene_immunescore_triangle("KLF7")
 ```
-![KLF7 and immune score correlation triangle](./vignettes/12.jpg){width=90%}
+![KLF7 and immune score correlation triangle](./vignettes/12.jpg)
 
 ## 3.3 Pan-cancer Cox regression analysis
 
@@ -425,7 +425,7 @@ method="pearson" is the default value. The alternatives to be passed to correlat
 ```r
 pan_forest("KLF7")
 ```
-![Pan-cancer Cox regression forest plot of KLF7](./vignettes/13.jpg){width=90%}
+![Pan-cancer Cox regression forest plot of KLF7](./vignettes/13.jpg)
 
 # 4. Cancer type specific analysis
 
@@ -472,7 +472,7 @@ legend position. Allowed values include "top","bottom","left","right" and "none"
 ```r
 tcga_boxplot("BRCA","KLF7")
 ```
-![KLF7 in BRCA](./vignettes/14.jpg){width=70%}
+![KLF7 in BRCA](./vignettes/14.jpg)
 
 #### 4.1.1.2 Paired tumor-normal boxplot
 
@@ -511,7 +511,7 @@ legend position. Allowed values include "top","bottom","left","right" and "none"
 ```r
 paired_boxplot("BRCA","KLF7")
 ```
-![KLF7 in paired BRCA](./vignettes/15.jpg){width=70%}
+![KLF7 in paired BRCA](./vignettes/15.jpg)
 
 #### 4.1.1.3 Age grouped boxplot
 
@@ -556,7 +556,7 @@ legend position. Allowed values include "top","bottom","left","right" and "none"
 ```r
 gene_age("ACC","KLF7")
 ```
-![Aged grouped expression of KLF7 in ACC](./vignettes/16.jpg){width=70%}
+![Aged grouped expression of KLF7 in ACC](./vignettes/16.jpg)
 
 #### 4.1.1.4 Gender grouped boxplot
 
@@ -597,7 +597,7 @@ legend position. Allowed values include "top","bottom","left","right" and "none"
 ```r
 gene_gender("BLCA","KLF7")
 ```
-![Gender grouped expression of KLF7 in BLCA](./vignettes/17.jpg){width=70%}
+![Gender grouped expression of KLF7 in BLCA](./vignettes/17.jpg)
 
 #### 4.1.1.5 Stage grouped boxplot
 
@@ -638,7 +638,7 @@ legend position. Allowed values include "top","bottom","left","right" and "none"
 ```r
 gene_stage("COAD","KLF7")
 ```
-![Stage grouped expression of KLF7 in COAD](./vignettes/18.jpg){width=70%}
+![Stage grouped expression of KLF7 in COAD](./vignettes/18.jpg)
 
 ### 4.1.2 Expression analysis grouped by the expression of a spcecific gene
 
@@ -673,7 +673,7 @@ the number of top DEGS to be shown in the heatmap.
 ```r
 gene_deg_heatmap("BLCA","KLF7")
 ```
-![Heatmap of DEGs grouped by the expression of KLF7 in BLCA](./vignettes/19.jpg){width=90%}
+![Heatmap of DEGs grouped by the expression of KLF7 in BLCA](./vignettes/19.jpg)
 
 #### 4.1.2.2 GSEA-GO grouped by the expression of a spcecific gene
 
@@ -708,7 +708,7 @@ cutoff value of pvalue, 0.05 was the default setting.
 ```r
 gene_gsea_go("BLCA","KLF7")
 ```
-![GSEA-GO analysis of DEGs grouped by the expression of KLF7 in BLCA](./vignettes/20.jpg){width=90%}
+![GSEA-GO analysis of DEGs grouped by the expression of KLF7 in BLCA](./vignettes/20.jpg)
 
 #### 4.1.2.3 GSEA-KEGG grouped by the expression of a spcecific gene
 
@@ -743,7 +743,7 @@ cutoff value of pvalue, 0.05 was the default setting.
 ```r
 gene_gsea_kegg("BLCA","KLF7")
 ```
-![GSEA-GO analysis of DEGs grouped by the expression of KLF7 in BLCA](./vignettes/21.jpg){width=90%}
+![GSEA-GO analysis of DEGs grouped by the expression of KLF7 in BLCA](./vignettes/21.jpg)
 
 ## 4.2 Diagnostic ROC Curve
 
@@ -772,7 +772,7 @@ gene name likes "KLF7".
 ```r
 tcga_roc("BRCA","KLF7")
 ```
-![Diagnostic ROC curve of KLF7 in BRCA](./vignettes/22.jpg){width=90%}
+![Diagnostic ROC curve of KLF7 in BRCA](./vignettes/22.jpg)
 
 ## 4.3 Cancer type specific correlation analysis
 
@@ -812,8 +812,8 @@ whether density of gene expression was shown.
 gene_gene_scatter("BLCA","CBX2","CBX3")
 gene_gene_scatter("BLCA","CBX2","CBX3",density="T")
 ```
-![Correlation of CBX2 and CBX3 in BLCA](./vignettes/23.jpg){width=90%}
-![Correlation of CBX2 and CBX3 in BLCA](./vignettes/24.jpg){width=90%}
+![Correlation of CBX2 and CBX3 in BLCA](./vignettes/23.jpg)
+![Correlation of CBX2 and CBX3 in BLCA](./vignettes/24.jpg)
 
 ### 4.3.2 Gene-promoter methylation correlation scatter
 
@@ -842,7 +842,7 @@ gene name likes "KLF7".
 ```r
 gene_methylation_scatter("BLCA","KLF7")
 ```
-![Gene_methylation correlation](./vignettes/25.jpg){width=90%}
+![Gene_methylation correlation](./vignettes/25.jpg)
 
 ### 4.3.3 Expression heatmap of significantly correlated genes and GO analysis
 
@@ -875,7 +875,7 @@ gene name likes "KLF7".
 ```r
 gene_coexp_heatmap("STAD","KLF7")
 ```
-![Heatmap and Go enrichment of co-expressed genes of KLF7 in STAD](./vignettes/26.jpg){width=90%}
+![Heatmap and Go enrichment of co-expressed genes of KLF7 in STAD](./vignettes/26.jpg)
 
 ## 4.4 Survavial analysis
 
@@ -908,7 +908,7 @@ gene name likes "KLF7".
 ```r
 tcga_kmplot("COAD","KLF7")
 ```
-![KM plot of KLF7 in COAD](./vignettes/27.jpg){width=80%}
+![KM plot of KLF7 in COAD](./vignettes/27.jpg)
 
 ### 4.4.2 Survavial analysis based on the promoter methylation of a spcecific gene
 
@@ -939,7 +939,7 @@ gene name likes "KLF7".
 ```r
 methy_kmplot("COAD","KLF7")
 ```
-![Methylation KMplot](./vignettes/28.jpg){width=80%}
+![Methylation KMplot](./vignettes/28.jpg)
 
 # 5. Built-in data extraction
 
