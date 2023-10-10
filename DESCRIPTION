@@ -50,11 +50,6 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 biocViews: 
-    PancancerDifferentialExpression,
-    GeneExpressionMethylationCorrelation,
-    GeneExpressionImmuneCorrelation,
-    GeneExpressionTMBCorrelation,
-    GeneExpressionMSICorrelation,
     Pathway,
     Survival,
     Visualization,
