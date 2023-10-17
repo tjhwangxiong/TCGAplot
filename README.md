@@ -14,15 +14,8 @@ Pan-cancer analysis aimed to examine the commonalities and heterogeneity among t
 
 # 2. Installation
 
-To install this package, start R (version "4.3") and enter:
-
-
-```r
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("TCGAplot")
-```
+To install this package, download TCGAplot R package at https://github.com/tjhwangxiong/TCGAplot/releases/download/v0.99.0/TCGAplot_0.99.0.zip
+and install locally.
 
 # 3. Pan-cancer analysis
 
