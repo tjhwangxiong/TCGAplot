@@ -22,6 +22,7 @@ pan_tumor_boxplot=function(gene){
           axis.title.y = element_text(size=14),
           axis.text.y = element_text(size = 12))+
     border("black")+
-    theme(legend.position = "none")+RColorBrewer::scale_color_brewer(palette = "Set1")
+    theme(legend.position = "none")+
+    scale_color_brewer(palette = "Set1")
 
 }
