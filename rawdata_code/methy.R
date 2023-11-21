@@ -26,7 +26,7 @@ for (project in projects) {
                         data.type = "Methylation Beta Value",
                         platform = c("Illumina Human Methylation 450"))
 
-  #GDCdownload(query.met)
+  GDCdownload(query.met)
   expdat=GDCprepare(query = query.met)
   count <- assay(expdat)%>%
     t()%>%
