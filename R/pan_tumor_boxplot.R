@@ -3,6 +3,7 @@
 #' @description Create a pan-cancer box plot for a single gene in tumor samples.
 #' @param gene gene names likes "KLF7".
 #' @import ggpubr
+#' @import RColorBrewer
 #' @importFrom dplyr select
 #' @export
 #' @examples pan_tumor_boxplot("KLF7")
