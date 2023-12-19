@@ -600,7 +600,7 @@ Create a box plot for a single gene with symbols indicating statistical signific
 
 
 ```r
-gene_gender(cancer,gene,add = "jitter",palette="jco",legend="none")
+gene_stage(cancer,gene,add = "jitter",palette="jco",legend="none")
 ```
 
 ### Arguments
