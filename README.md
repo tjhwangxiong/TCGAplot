@@ -1,5 +1,5 @@
-# TCGAplot
-
+# TCGAplot 
+# (DO NOT INSTALL USING "devtools", PLEASE download the .zip file and install the package locally)
 **author:** Xiong Wang
 
 **email:** wangxiong@tjh.tjmu.edu.cn
@@ -14,7 +14,7 @@ Pan-cancer analysis aimed to examine the commonalities and heterogeneity among t
 
 # 2. Installation
 
-To install this package, download TCGAplot R package at [https://github.com/tjhwangxiong/TCGAplot/releases/download/v4.0.0/TCGAplot_4.0.0.zip](https://github.com/tjhwangxiong/TCGAplot/releases/download/v4.0.0/TCGAplot_4.0.0.zip)
+To install this package, download TCGAplot R package at [https://github.com/tjhwangxiong/TCGAplot/releases/download/v5.0.0/TCGAplot_5.0.0.zip](https://github.com/tjhwangxiong/TCGAplot/releases/download/v5.0.0/TCGAplot_5.0.0.zip)
 and install locally.
 
 # 3. Pan-cancer analysis
