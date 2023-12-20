@@ -1,5 +1,5 @@
 # TCGAplot 
-### (DO NOT INSTALL USING "devtools", PLEASE download the .zip file and install the package locally)
+#### (DO NOT INSTALL USING "devtools", PLEASE download the .zip file and install the package locally)
 **author:** Xiong Wang
 
 **email:** wangxiong@tjh.tjmu.edu.cn
