@@ -1,5 +1,5 @@
 # TCGAplot 
-#### <span style="color:red">(DO NOT INSTALL USING "devtools", PLEASE download the .zip file and install the package locally)</span>
+#### <span style="color:red">"(DO NOT INSTALL USING "devtools", PLEASE download the .zip file and install the package locally)"</span>
 
 **author:** Xiong Wang
 
