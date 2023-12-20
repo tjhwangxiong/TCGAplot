@@ -1,5 +1,5 @@
 # TCGAplot 
-#### <font color=red>(DO NOT INSTALL USING "devtools", PLEASE download the .zip file and install the package locally)</font>
+<font color=red>(DO NOT INSTALL USING "devtools", PLEASE download the .zip file and install the package locally)</font>
 **author:** Xiong Wang
 
 **email:** wangxiong@tjh.tjmu.edu.cn
