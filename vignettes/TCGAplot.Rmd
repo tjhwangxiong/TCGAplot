@@ -1,0 +1,1172 @@
+---
+title: "TCGAplot"
+author:
+  name: Xiong Wang
+  email: wangxiong@tjh.tjmu.edu.cn
+  affiliation: Department of Laboratory Medicine, Tongji Hospital, Tongji Medical College, HUST
+output:
+  rmarkdown::html_vignette:
+    fig_width: 8
+    fig_height: 5
+  
+  BiocStyle::html_document:
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{TCGAplot}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(TCGAplot)
+```
+
+# 1. Introduction
+
+Pan-cancer analysis aimed to examine the commonalities and heterogeneity among the genomic and cellular alterations across diverse types of tumors. Pan-cancer analysis of gene expression, tumor mutational burden (TMB), microsatellite instability (MSI), and tumor immune microenvironment (TIME) became available based on the exome, transcriptome, and DNA methylome data from TCGA. Some online tools provided user-friendly analysis of gene and protein expression, mutation, methylation, and survival for TCGA data, such as GEPIA 2 (<http://gepia2.cancer-pku.cn/#index>), cBioPortal (<http://www.cbioportal.org/>), UALCAN (<https://ualcan.path.uab.edu/index.html>), and MethSurv (<https://biit.cs.ut.ee/methsurv/>). However, these online tools were either uni-functional or not able to perform analysis of user-defined functions. Therefore, TCGA pan-cancer multi-omics data were integrated and included in this package, including gene expression TPM (transcripts per million) matrix, TMB, MSI, immune cell ratio, immune score, promoter methylation, and clinical information. A number of functions were generated to perform pan-cancer paired/unpaired differential gene expression analysis, pan-cancer correlation analysis between gene expression and TMB, MSI, immune cell ratio, immune score,immune stimulator,immune inhibitor, and promoter methylation. Methods for visualization were provided, including paired/unpaired boxplot, survival plot, ROC curve, heatmap, scatter, radar chart, and forest plot,in order to easily perform integrative pan-cancer multi-omics analysis. Finally, these built-in data could be extracted and analyzed with user-defined functions, making the pan-cancer analysis much more convenient.
+
+# 2. Installation
+
+To install this package, start R (version "4.3") and enter:
+
+```{r, eval = FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("TCGAplot")
+```
+
+# 3. Pan-cancer analysis
+
+## 3.1 Pan-cancer expression analysis
+
+### 3.1.1 Pan-cancer tumor-normal boxplot
+
+#### `pan_boxplot`
+
+Create a pan-cancer box plot for a single gene with symbols indicating statistical significance.
+
+```{r, eval = FALSE}
+pan_boxplot(gene,palette="jco",legend="right")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**palette**
+
+the color palette to be used for filling by groups. Allowed values include scientific journal palettes from ggsci R package, e.g.: "npg", "aaas", "lancet", "jco", "ucscgb", "uchicago", "simpsons" and "rickandmorty".
+
+**legend**
+
+legend position. Allowed values include "top","bottom","left","right" and "none".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center'}
+pan_boxplot("KLF7")
+```
+![Pan-cancer box plot of KLF7](./1.jpg){width=90%}
+
+### 3.1.2 Pan-cancer paired tumor-normal boxplot
+
+#### `pan_paired_boxplot`
+
+Create a pan-cancer paired box plot for a single gene with symbols indicating statistical significance.
+
+```{r, eval = FALSE}
+pan_paired_boxplot(gene,palette="jco",legend="right")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**palette**
+
+the color palette to be used for filling by groups. Allowed values include scientific journal palettes from ggsci R package, e.g.: "npg", "aaas", "lancet", "jco", "ucscgb", "uchicago", "simpsons" and "rickandmorty".
+
+**legend**
+
+legend position. Allowed values include "top","bottom","left","right" and "none".
+
+**Example**
+
+```{r, eval=FALSE,fig.show='asis', fig.align='center'}
+pan_paired_boxplot("KLF7")
+```
+![Pan-cancer paired box plot of KLF7](./2.jpg){width=90%}
+
+## 3.2 Pan-cancer correlation analysis
+
+### 3.2.1 Pan-cancer gene expression and TMB correlation radar chart
+
+#### `gene_TMB_radar`
+
+Create a pan-cancer radar chart for gene expression and TMB correlation.
+
+```{r, eval=FALSE}
+gene_TMB_radar(gene,method = "pearson")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE,fig.show='asis', fig.align='center', fig.height = 8, fig.width = 8}
+gene_TMB_radar("KLF7")
+```
+![KLF7 and TMB correlation](./3.jpg){width=90%}
+
+### 3.2.2 Pan-cancer gene expression and MSI correlation radar chart
+
+#### `gene_MSI_radar`
+
+Create a pan-cancer radar chart for gene expression and MSI correlation.
+
+```{r, eval=FALSE}
+gene_MSI_radar(gene,method = "pearson")
+```
+
+### Arguments
+
+**gene** gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 8, fig.width = 8}
+gene_MSI_radar("KLF7")
+```
+![KLF7 and MSI correlation](./4.jpg){width=90%}
+
+### 3.2.3 Pan-cancer gene expression and immune-related genes correlation
+
+### 3.2.3.1 Pan-cancer gene expression and ICGs correlation
+
+#### `gene_checkpoint_heatmap`
+
+Create a pan-cancer heatmap with symbols indicating statistical significance to reveal the correlation between the expression of a single gene and ICGs (immune checkpoint genes).
+
+ICGs geneset included "CD274","CTLA4","HAVCR2","LAG3","PDCD1","PDCD1LG2","SIGLEC15",and "TIGIT".
+
+```{r, eval=FALSE}
+gene_checkpoint_heatmap(gene,method="pearson")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center'}
+gene_checkpoint_heatmap("KLF7")
+```
+![KLF7 and ICGs correlation](./5.jpg){width=90%}
+
+### 3.2.3.2 Pan-cancer gene expression and chemokine correlation
+
+#### `gene_chemokine_heatmap`
+
+Create a pan-cancer heatmap with symbols indicating statistical significance to reveal the correlation between the expression of a single gene and chemokine.
+
+Chemokine geneset included "CCL1","CCL2","CCL3","CCL4","CCL5","CCL7","CCL8","CCL11","CCL13","CCL14","CCL15","CCL16","CCL17","CCL18","CCL19","CCL20","CCL21","CCL22","CCL23","CCL24","CCL25","CCL26","CCL28","CX3CL1","CXCL1","CXCL2","CXCL3","CXCL5","CXCL6","CXCL8","CXCL9","CXCL10","CXCL11","CXCL12","CXCL13","CXCL14","CXCL16", and "CXCL17".
+
+```{r, eval=FALSE}
+gene_chemokine_heatmap(gene,method="pearson")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 8, fig.width = 10}
+gene_chemokine_heatmap("KLF7")
+```
+![KLF7 and chemokine correlatoin](./6.jpg){width=90%}
+
+### 3.2.3.3 Pan-cancer gene expression and chemokine receptor correlation
+
+#### `gene_receptor_heatmap`
+
+Create a pan-cancer heatmap with symbols indicating statistical significance to reveal the correlation between the expression of a single gene and chemokine receptors.
+
+Chemokine receptor geneset included "CCR1","CCR2","CCR3","CCR4","CCR5","CCR6","CCR7","CCR8","CCR9","CCR10", "CXCR1","CXCR2","CXCR3","CXCR4","CXCR5","CXCR6","XCR1", and "CX3R1".
+
+```{r, eval=FALSE}
+gene_receptor_heatmap(gene,method="pearson")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center'}
+gene_receptor_heatmap("KLF7")
+```
+![KLF7 and chemokine receptor correlation](./7.jpg){width=90%}
+
+### 3.2.3.4 Pan-cancer gene expression and immune stimulator correlation
+
+#### `gene_immustimulator_heatmap`
+
+Create a pan-cancer heatmap with symbols indicating statistical significance to reveal the correlation between the expression of a single gene and immune stimulators.
+
+Immune stimulator geneset included "CD27","CD276","CD28","CD40","CD40LG","CD48","CD70","CD80","CD86","CXCL12","CXCR4","ENTPD1","HHLA2","ICOS","ICOSLG","IL2RA","IL6","IL6R","KLRC1","KLRK1","LTA","MICB","NT5E","PVR","RAET1E","TMIGD2","TNFRSF13B","TNFRSF13C","TNFRSF14","TNFRSF17","TNFRSF18","TNFRSF25","TNFRSF4","TNFRSF8","TNFRSF9","TNFSF13","TNFSF13B","TNFSF14","TNFSF15","TNFSF18","TNFSF4","TNFSF9", and "ULBP1".
+
+```{r, eval=FALSE}
+gene_immustimulator_heatmap(gene,method="pearson")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 8, fig.width = 10}
+gene_immustimulator_heatmap("KLF7")
+```
+![KLF7 and immune stimulator correlation](./8.jpg){width=90%}
+
+### 3.2.3.5 Pan-cancer gene expression and immune inhibitor correlation
+
+#### `gene_immuinhibitor_heatmap`
+
+Create a pan-cancer heatmap with symbols indicating statistical significance to reveal the correlation between the expression of a single gene and immune inhibitors.
+
+Immune inhibitor geneset included "ADORA2A","BTLA","CD160","CD244","CD274","CD96","CSF1R","CTLA4","HAVCR2","IDO1","IL10","IL10RB","KDR","KIR2DL1","KIR2DL3","LAG3","LGALS9","PDCD1","PDCD1LG2","TGFB1","TGFBR1","TIGIT", and "VTCN1".
+
+```{r, eval=FALSE}
+gene_immuinhibitor_heatmap(gene,method="pearson")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center'}
+gene_immuinhibitor_heatmap("KLF7")
+```
+![KLF7 and immune inhibitor correlation](./9.jpg){width=90%}
+
+### 3.2.4 Pan-cancer gene expression and immune infiltration correlation
+
+### 3.2.4.1 Pan-cancer gene expression and immune cell ratio correlation
+
+#### `gene_immucell_heatmap`
+
+Create a pan-cancer heatmap with symbols indicating statistical significance to reveal the correlation between the expression of a single gene and immune cell ratio.
+
+```{r, eval=FALSE}
+gene_immucell_heatmap(gene,method="pearson")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center'}
+gene_immucell_heatmap("KLF7")
+```
+![KLF7 and immune cell ratio correlation](./10.jpg){width=90%}
+
+### 3.2.4.2 Pan-cancer gene expression and immune score correlation
+
+#### `gene_immunescore_heatmap`
+
+Create a pan-cancer heatmap with symbols indicating statistical significance to reveal the correlation between the expression of a single gene and immune scores, including Stromal score, immune score, and ESTIMATE score.
+
+```{r, eval=FALSE}
+gene_immunescore_heatmap(gene,method="pearson")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 4, fig.width = 10}
+gene_immunescore_heatmap("KLF7")
+```
+![KLF7 and immune score correlation heatmap](./11.jpg){width=90%}
+
+#### `gene_immunescore_triangle`
+
+Create a pan-cancer triangle reveals the correlation between the expression of a single gene and immune scores, including Stromal score, immune score, and ESTIMATE score.
+
+```{r, eval=FALSE}
+gene_immunescore_triangle(gene,method="pearson")
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center'}
+gene_immunescore_triangle("KLF7")
+```
+![KLF7 and immune score correlation triangle](./12.jpg){width=90%}
+
+## 3.3 Pan-cancer Cox regression analysis
+
+### 3.3.1 Pan-cancer Cox regression forest plot
+
+#### `pan_forest`
+
+Create a pan-cancer Cox regression forest plot for a specific gene.
+
+```{r, eval=FALSE}
+pan_forest(gene)
+```
+
+### Arguments
+
+**gene**
+
+gene name likes "KLF7".
+
+**method**
+
+method="pearson" is the default value. The alternatives to be passed to correlation are "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 8, fig.width = 10}
+pan_forest("KLF7")
+```
+![Pan-cancer Cox regression forest plot of KLF7](./13.jpg){width=90%}
+
+# 4. Cancer type specific analysis
+
+## 4.1 Expression analysis
+
+### 4.1.1 Expression analysis grouped by clinical information
+
+#### 4.1.1.1 Tumor-normal boxplot
+
+#### `tcga_boxplot`
+
+Create a tumor-normal box plot for a single gene with symbols indicating statistical significance in a specific type of cancer.
+
+```{r, eval=FALSE}
+tcga_boxplot(cancer,gene,add = "jitter",palette="jco",legend="none")
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "BRCA".
+
+**gene**
+
+gene name likes "KLF7".
+
+**add**
+
+character vector for adding another plot element likes "none", "dotplot", "jitter".
+
+**palette**
+
+the color palette to be used for coloring or filling by groups. Allowed values include scientific journal palettes from ggsci R package, e.g.: "npg", "aaas", "lancet", "jco".
+
+**legend**
+
+legend position. Allowed values include "top","bottom","left","right" and "none".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 4, fig.width = 6}
+tcga_boxplot("BRCA","KLF7")
+```
+![KLF7 in BRCA](./14.jpg){width=90%}
+
+#### 4.1.1.2 Paired tumor-normal boxplot
+
+#### `paired_boxplot`
+
+Create a paired tumor-normal box plot for a single gene with symbols indicating statistical significance in a specific type of cancer.
+
+Only cancers with more than 20 paired samples could be analyzed, including "BLCA","BRCA","COAD","ESCA","HNSC","KICH","KIRC","KIRP","LIHC","LUAD","LUSC","PRAD","STAD","THCA", and "UCEC".
+
+```{r, eval=FALSE}
+paired_boxplot(cancer,gene,palette="jco",legend="none")
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "BRCA".
+
+**gene**
+
+gene name likes "KLF7".
+
+**palette**
+
+the color palette to be used for coloring or filling by groups. Allowed values include scientific journal palettes from ggsci R package, e.g.: "npg", "aaas", "lancet", "jco".
+
+**legend**
+
+legend position. Allowed values include "top","bottom","left","right" and "none".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 4, fig.width = 6}
+paired_boxplot("BRCA","KLF7")
+```
+![KLF7 in paired BRCA](./15.jpg){width=90%}
+
+#### 4.1.1.3 Age grouped boxplot
+
+#### `gene_age`
+
+Create a box plot for a single gene with symbols indicating statistical significance grouped by age in a specific type of cancer.
+
+```{r, eval=FALSE}
+gene_age(cancer,gene,age=60,add = "jitter",palette="jco",legend="none")
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "ACC".
+
+**gene**
+
+gene name likes "KLF7".
+
+**age**
+
+numeric number of age like 60.
+
+**add**
+
+character vector for adding another plot element likes "none", "dotplot", "jitter".
+
+**palette**
+
+the color palette to be used for coloring or filling by groups. Allowed values include scientific journal palettes from ggsci R package, e.g.: "npg", "aaas", "lancet", "jco".
+
+**legend**
+
+legend position. Allowed values include "top","bottom","left","right" and "none".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 4, fig.width = 6}
+gene_age("ACC","KLF7")
+```
+![Aged grouped expression of KLF7 in ACC](./16.jpg){width=90%}
+
+#### 4.1.1.4 Gender grouped boxplot
+
+#### `gene_gender`
+
+Create a box plot for a single gene with symbols indicating statistical significance grouped by gender in a specific type of cancer.
+
+```{r, eval=FALSE}
+gene_gender(cancer,gene,add = "jitter",palette="jco",legend="none")
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "BLCA".
+
+**gene**
+
+gene name likes "KLF7".
+
+**add**
+
+character vector for adding another plot element likes "none", "dotplot", "jitter".
+
+**palette**
+
+the color palette to be used for coloring or filling by groups. Allowed values include scientific journal palettes from ggsci R package, e.g.: "npg", "aaas", "lancet", "jco".
+
+**legend**
+
+legend position. Allowed values include "top","bottom","left","right" and "none".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 4, fig.width = 6}
+gene_gender("BLCA","KLF7")
+```
+![Gender grouped expression of KLF7 in BLCA](./17.jpg){width=90%}
+
+#### 4.1.1.5 Stage grouped boxplot
+
+#### `gene_stage`
+
+Create a box plot for a single gene with symbols indicating statistical significance grouped by stage in a specific type of cancer.
+
+```{r, eval=FALSE}
+gene_gender(cancer,gene,add = "jitter",palette="jco",legend="none")
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "COAD".
+
+**gene**
+
+gene name likes "KLF7".
+
+**add**
+
+character vector for adding another plot element likes "none", "dotplot", "jitter".
+
+**palette**
+
+the color palette to be used for coloring or filling by groups. Allowed values include scientific journal palettes from ggsci R package, e.g.: "npg", "aaas", "lancet", "jco".
+
+**legend**
+
+legend position. Allowed values include "top","bottom","left","right" and "none".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 4, fig.width = 6}
+gene_stage("COAD","KLF7")
+```
+![Stage grouped expression of KLF7 in COAD](./18.jpg){width=90%}
+
+### 4.1.2 Expression analysis grouped by the expression of a spcecific gene
+
+#### 4.1.2.1 Differential expressed gene heatmap grouped by a specific gene
+
+#### `gene_deg_heatmap`
+
+Create a heatmap for differentially expressed genes grouped by the expression of a single gene in a specific type of cancer.
+
+```{r, eval=FALSE}
+gene_deg_heatmap(cancer, gene,top_n=20)
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "BLCA".
+
+**gene**
+
+gene name likes "KLF7".
+
+**top_n**
+
+the number of top DEGS to be shown in the heatmap.
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 8, fig.width = 10}
+gene_deg_heatmap("BLCA","KLF7")
+```
+![Heatmap of DEGs grouped by the expression of KLF7 in BLCA](./19.jpg){width=90%}
+
+#### 4.1.2.2 GSEA-GO grouped by the expression of a spcecific gene
+
+#### `gene_gsea_go`
+
+GSEA-GO analysis of DEGs grouped by the expression of a single gene in a specific type of cancer, and the top 5 GO BP pathways were shown.
+
+```{r, eval=FALSE}
+gene_gsea_go(cancer,gene,logFC_cutoff=2,pvalue_cutoff = 0.05)
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "BLCA".
+
+**gene**
+
+gene name likes "KLF7".
+
+**logFC_cutoff** cutoff value of logFC, 2 was the default setting.
+
+**pvalue_cutoff**
+
+cutoff value of pvalue, 0.05 was the default setting.
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 8, fig.width = 10}
+gene_gsea_go("BLCA","KLF7")
+```
+![GSEA-GO analysis of DEGs grouped by the expression of KLF7 in BLCA](./20.jpg){width=90%}
+
+#### 4.1.2.3 GSEA-KEGG grouped by the expression of a spcecific gene
+
+#### `gene_gsea_kegg`
+
+GSEA-KEGG analysis of DEGs grouped by the expression of a single gene in a specific type of cancer, and the top 5 KEGG pathways were shown.
+
+```{r, eval=FALSE}
+gene_gsea_kegg(cancer,gene,logFC_cutoff=2,pvalue_cutoff = 0.05)
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "BLCA".
+
+**gene**
+
+gene name likes "KLF7".
+
+**logFC_cutoff** cutoff value of logFC, 2 was the default setting.
+
+**pvalue_cutoff**
+
+cutoff value of pvalue, 0.05 was the default setting.
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 8, fig.width = 10}
+gene_gsea_kegg("BLCA","KLF7")
+```
+![GSEA-GO analysis of DEGs grouped by the expression of KLF7 in BLCA](./21.jpg){width=90%}
+
+## 4.2 Diagnostic ROC Curve
+
+#### `tcga_roc`
+
+Diagnostic ROC curve of a single gene in a specific type of cancer.
+
+```{r, eval=FALSE}
+tcga_roc(cancer,gene)
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "BRCA".
+
+**gene**
+
+gene name likes "KLF7".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 6, fig.width = 8}
+tcga_roc("BRCA","KLF7")
+```
+![Diagnostic ROC curve of KLF7 in BRCA](./22.jpg){width=90%}
+
+## 4.3 Cancer type specific correlation analysis
+
+### 4.3.1 Gene-gene correlation scatter
+
+#### `gene_gene_scatter`
+
+Scatter plot of gene and gene correlation in a specific type cancer.
+
+```{r, eval=FALSE}
+gene_gene_scatter(cancer,gene1,gene2,density="F")
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "BLCA".
+
+**gene1**
+
+name of gene1 likes "CBX2".
+
+**gene2**
+
+name of gene1 likes "CBX3".
+
+**density**
+
+whether density of gene expression was shown.
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 6, fig.width = 8}
+gene_gene_scatter("BLCA","CBX2","CBX3")
+gene_gene_scatter("BLCA","CBX2","CBX3",density="T")
+```
+![Correlation of CBX2 and CBX3 in BLCA](./23.jpg){width=90%}
+![Correlation of CBX2 and CBX3 in BLCA](./24.jpg){width=90%}
+
+### 4.3.2 Gene-promoter methylation correlation scatter
+
+#### `gene_methylation_scatter`
+
+Scatter plot of gene expression and gene promoter methylation correlation in a specific type of cancer. A pdf file named gene_methylation will be generated in the working directory.
+
+```{r, eval=FALSE}
+gene_methylation_scatter(cancer,gene)
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "BLCA".
+
+**gene**
+
+gene name likes "KLF7".
+
+**Example**
+
+```{r, eval=FALSE}
+gene_methylation_scatter("BLCA","KLF7")
+```
+![Gene_methylation correlation](./25.jpg){width=90%}
+
+### 4.3.3 Expression heatmap of significantly correlated genes and GO analysis
+
+#### `gene_coexp_heatmap`
+
+Heatmap and Go enrichment of the positive and negative co-expressed genes of a single gene in a specific type of cancer.
+
+```{r, eval=FALSE}
+gene_coexp_heatmap(cancer,gene,top_n=20, method="pearson")
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "STAD".
+
+**gene**
+
+gene name likes "KLF7".
+
+**top_n** the number of co-expressed genes.
+
+**method** method="pearson" is the default value. The alternatives to be passed to correlation were "spearman" and "kendall".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 8, fig.width = 10}
+gene_coexp_heatmap("STAD","KLF7")
+```
+![Heatmap and Go enrichment of co-expressed genes of KLF7 in STAD](./26.jpg){width=90%}
+
+## 4.4 Survavial analysis
+
+### 4.4.1 Survavial analysis based on the expression of a single gene
+
+#### `tcga_kmplot`
+
+K_M survival plot for a single gene in a specific type of cancer.
+
+```{r, eval=FALSE}
+tcga_kmplot(cancer,gene,palette='jco')
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "COAD".
+
+**gene**
+
+gene name likes "KLF7".
+
+**palette** the color palette to be used for coloring or filling by groups. Allowed values include scientific journal palettes from ggsci R package, e.g.: "npg", "aaas", "lancet", "jco".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 8, fig.width = 10}
+tcga_kmplot("COAD","KLF7")
+```
+![KM plot of KLF7 in COAD](./27.jpg){width=90%}
+
+### 4.4.2 Survavial analysis based on the promoter methylation of a spcecific gene
+
+#### `methy_kmplot`
+
+Describes the K_M survival plot based on the promoter methylation of a single gene in a specific type of cancer. A pdf file named methylation_kmplot will be generated in the working directory.
+
+```{r, eval=FALSE}
+methy_kmplot(cancer,gene,palette='jco')
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "COAD".
+
+**gene**
+
+gene name likes "KLF7".
+
+**palette** the color palette to be used for coloring or filling by groups. Allowed values include scientific journal palettes from ggsci R package, e.g.: "npg", "aaas", "lancet", "jco".
+
+**Example**
+
+```{r, eval=FALSE, fig.show='asis', fig.align='center', fig.height = 8, fig.width = 10}
+methy_kmplot("COAD","KLF7")
+```
+![Methylation KMplot](./28.jpg){width=90%}
+
+# 5. Built-in data extraction
+
+## 5.1 TPM matrix extraction
+
+#### `get_tpm`
+
+Extract the TPM matrix of a specific type of cancer in TCGA.
+
+```{r, eval=FALSE}
+get_tpm(cancer)
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "COAD".
+
+**Example**
+
+```{r, eval=FALSE}
+get_tpm("COAD")
+
+#>                  Cancer Group TSPAN6 TNMD DPM1 SCYL3 C1orf112  FGR  CFH FUCA2
+#> TCGA-CM-4743-01A   COAD Tumor   4.83 0.00 6.54  1.92     1.50 2.72 3.82  6.05
+#> TCGA-D5-6931-01A   COAD Tumor   6.58 1.73 6.70  3.26     3.42 3.11 3.97  6.31
+#> TCGA-AA-A00A-01A   COAD Tumor   5.93 1.03 6.20  2.90     2.12 2.99 3.24  6.82
+#> TCGA-AD-A5EK-01A   COAD Tumor   7.36 0.47 8.03  2.75     2.75 1.51 2.26  6.35
+#> TCGA-A6-2680-01A   COAD Tumor   6.90 1.73 6.66  2.55     3.01 2.79 2.88  6.02
+```
+
+## 5.2 Paired TPM matrix extraction
+
+#### `get_paired_tpm`
+
+Extract the TPM matrix of a specific type of cancer with paired samples (n\>20) in TCGA.
+
+```{r, eval=FALSE}
+get_paired_tpm(cancer)
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "COAD".
+
+**Example**
+
+```{r, eval=FALSE}
+get_paired_tpm("COAD")
+
+#>                  Cancer Group TSPAN6 TNMD DPM1 SCYL3 C1orf112  FGR  CFH FUCA2
+#> TCGA-CM-4743-01A   COAD Tumor   4.83 0.00 6.54  1.92     1.50 2.72 3.82  6.05
+#> TCGA-D5-6931-01A   COAD Tumor   6.58 1.73 6.70  3.26     3.42 3.11 3.97  6.31
+#> TCGA-AA-A00A-01A   COAD Tumor   5.93 1.03 6.20  2.90     2.12 2.99 3.24  6.82
+#> TCGA-AD-A5EK-01A   COAD Tumor   7.36 0.47 8.03  2.75     2.75 1.51 2.26  6.35
+#> TCGA-A6-2680-01A   COAD Tumor   6.90 1.73 6.66  2.55     3.01 2.79 2.88  6.02
+```
+
+## 5.3 Clinical information extraction
+
+#### `get_meta`
+
+Extract the clinical information of a specific type of cancer in TCGA.
+
+```{r, eval=FALSE}
+get_meta(cancer)
+```
+
+### Arguments
+
+**cancer**
+
+cancer name likes "COAD".
+
+**Example**
+
+```{r, eval=FALSE}
+get_meta("COAD")
+
+#>              Cancer event   time age gender stage
+#> TCGA-3L-AA1B   COAD     0   5.13  61      F     I
+#> TCGA-4N-A93T   COAD     0   0.27  67      M   III
+#> TCGA-4T-AA8H   COAD     0   5.33  42      F    II
+#> TCGA-5M-AAT4   COAD     1   1.63  74      M    IV
+#> TCGA-5M-AAT6   COAD     1   9.67  41      F    IV
+#> TCGA-5M-AATE   COAD     0  40.00  76      M    II
+#> TCGA-A6-2671   COAD     0  21.60  86      M    IV
+
+```
+
+## 5.4 TMB extraction
+
+#### `get_tmb`
+
+Extract the TMB matrix of all samples in TCGA.
+
+```{r, eval=FALSE}
+get_tmb()
+```
+
+**Example**
+
+```{r, eval=FALSE}
+get_tmb()
+
+#>                     TMB
+#> TCGA-OR-A5J1-01A   0.70
+#> TCGA-OR-A5J2-01A   0.83
+#> TCGA-OR-A5J3-01A   0.27
+#> TCGA-OR-A5J5-01A   8.53
+#> TCGA-OR-A5J6-01A   0.77
+```
+
+## 5.5 MSI extraction
+
+#### `get_msi`
+
+Extract the MSI matrix of all samples in TCGA.
+
+```{r, eval=FALSE}
+get_msi()
+```
+
+**Example**
+
+```{r, eval=FALSE}
+get_msi()
+
+#>                MSI
+#> TCGA-OR-A5J1 0.275
+#> TCGA-OR-A5J2 0.324
+#> TCGA-OR-A5J3 0.343
+#> TCGA-OR-A5J5 0.522
+#> TCGA-OR-A5J6 0.289
+```
+
+## 5.6 Methylation extraction
+
+#### `get_methy`
+
+Extract the promoter methylation information of all samples in TCGA.
+
+```{r, eval=FALSE}
+get_methy()
+```
+
+**Example**
+
+```{r, eval=FALSE}
+get_methy()
+
+#> $probe
+#>            probe           gene
+#> 1     cg26705472         A4GALT
+#> 3     cg06339629          AADAT
+#> 5     cg14239811          AADAT
+```
+
+## 5.7 Immune cell ratio extraction
+
+#### `get_immu_ratio`
+
+Extract the immune cell ratio of all samples in TCGA.
+
+```{r, eval=FALSE}
+get_immu_ratio()
+```
+
+**Example**
+
+```{r, eval=FALSE}
+get_immu_ratio()
+
+#>                  B cells memory B cells naive Dendritic cells activated
+#> TCGA-OR-A5LD-01A         0.0069        0.0000                    0.0000
+#> TCGA-OR-A5KO-01A         0.0685        0.0000                    0.0844
+#> TCGA-OR-A5LA-01A         0.0000        0.0117                    0.0000
+#> TCGA-OR-A5JW-01A         0.0133        0.0000                    0.0258
+#> TCGA-PA-A5YG-01A         0.0085        0.0056                    0.0100
+#> TCGA-OR-A5JD-01A         0.0146        0.0000                    0.0093
+
+```
+
+## 5.8 Immune score extraction
+
+#### `get_immuscore`
+
+Extract the immune score of all samples in TCGA.
+
+```{r, eval=FALSE}
+get_immuscore()
+```
+
+**Example**
+
+```{r, eval=FALSE}
+get_immuscore()
+
+#>                  B cells memory B cells naive Dendritic cells activated
+#> TCGA-OR-A5LD-01A         0.0069        0.0000                    0.0000
+#> TCGA-OR-A5KO-01A         0.0685        0.0000                    0.0844
+#> TCGA-OR-A5LA-01A         0.0000        0.0117                    0.0000
+#> TCGA-OR-A5JW-01A         0.0133        0.0000                    0.0258
+#> TCGA-PA-A5YG-01A         0.0085        0.0056                    0.0100
+
+```
+
+## 5.9 Built-in data summary
+
+#### `get_cancers`
+
+Return the sample summary of 33 types of cancer in TCGA.
+
+```{r, eval=FALSE}
+get_cancers()
+```
+
+**Example**
+
+```{r, eval=FALSE}
+get_cancers()
+
+#>        Normal Tumor
+#>   ACC       0    79
+#>   BLCA     19   409
+#>   BRCA    113  1113
+#>   CESC      3   306
+#>   CHOL      9    35
+#>   COAD     41   473
+#>   DLBC      0    48
+#>   ESCA     13   185
+```
+
+## 5.10 Built-in data paired sample summary
+
+#### `get_paired_cancers`
+
+Return the sample summary of 15 types of cancer containing more than 20 paired samples in TCGA
+
+```{r, eval=FALSE}
+get_paired_cancers()
+```
+
+**Example**
+
+```{r, eval=FALSE}
+get_paired_cancers()
+
+#>        Normal Tumor
+#>   BLCA     19    19
+#>   BRCA    113   113
+#>   COAD     41    41
+#>   ESCA     13    13
+#>   HNSC     43    43
+#>   KICH     25    25
+```
+
+```{r}
+sessionInfo()
+```
