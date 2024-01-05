@@ -18,9 +18,19 @@ Pan-cancer analysis aimed to examine the commonalities and heterogeneity among t
 
 To install this package for Windows system, download TCGAplot R package at [https://github.com/tjhwangxiong/TCGAplot/releases/download/v7.0.0/TCGAplot_7.0.0.zip](https://github.com/tjhwangxiong/TCGAplot/releases/download/v7.0.0/TCGAplot_7.0.0.zip) </br>
 
+or at Baidu Pan</br>
+[https://pan.baidu.com/s/1_zt-te0GmU_vbey3_Hx16Q?pwd=nmsy](https://pan.baidu.com/s/1_zt-te0GmU_vbey3_Hx16Q?pwd=nmsy)
+
 and install locally.
 
 ![install](/vignettes/install.png)
+</br>
+To install this package for Mac system, download TCGAplot R package at google drive [https://drive.google.com/file/d/1y79k-GQKz2b3Uv28eWDVYsCFPKVjm2WC/view?usp=sharing](https://drive.google.com/file/d/1y79k-GQKz2b3Uv28eWDVYsCFPKVjm2WC/view?usp=sharing) </br>
+
+or at Baidu Pan</br>
+[https://pan.baidu.com/s/1a7-Z5N8C7YLSjTogMeXE_A?pwd=agf7](https://pan.baidu.com/s/1a7-Z5N8C7YLSjTogMeXE_A?pwd=agf7)
+
+and install locally.
 
 There were several dependent R packages, and users could install these dependent R packages using the following codes before the installation of TCGAplot.
 
