@@ -16,13 +16,25 @@ University of Science and Technology, Wuhan 430030, China.
 Pan-cancer analysis aimed to examine the commonalities and heterogeneity among the genomic and cellular alterations across diverse types of tumors. Pan-cancer analysis of gene expression, tumor mutational burden (TMB), microsatellite instability (MSI), and tumor immune microenvironment (TIME) became available based on the exome, transcriptome, and DNA methylome data from TCGA. Some online tools provided user-friendly analysis of gene and protein expression, mutation, methylation, and survival for TCGA data, such as GEPIA 2 (<http://gepia2.cancer-pku.cn/#index>), cBioPortal (<http://www.cbioportal.org/>), UALCAN (<https://ualcan.path.uab.edu/index.html>), and MethSurv (<https://biit.cs.ut.ee/methsurv/>). However, these online tools were either uni-functional or not able to perform analysis of user-defined functions. Therefore, TCGA pan-cancer multi-omics data were integrated and included in this package, including gene expression TPM (transcripts per million) matrix, TMB, MSI, immune cell ratio, immune score, promoter methylation, and clinical information. A number of functions were generated to perform pan-cancer paired/unpaired differential gene expression analysis, pan-cancer correlation analysis between gene expression and TMB, MSI, immune cell ratio, immune score,immune stimulator,immune inhibitor, and promoter methylation. Methods for visualization were provided, including paired/unpaired boxplot, survival plot, ROC curve, heatmap, scatter, radar chart, and forest plot,in order to easily perform integrative pan-cancer multi-omics analysis. Finally, these built-in data could be extracted and analyzed with user-defined functions, making the pan-cancer analysis much more convenient.
 
 # 2. Installation
-## 2.1 For Windows system
+## 2.1 For Windows System
 To install this package for Windows system, download TCGAplot R package at [https://github.com/tjhwangxiong/TCGAplot/releases/download/v8.0.0/TCGAplot_8.0.0.zip](https://github.com/tjhwangxiong/TCGAplot/releases/download/v8.0.0/TCGAplot_8.0.0.zip) </br>
 
 and install locally.
 
 ![install](/vignettes/install.jpg)
 </br>
+
+## 2.2 For Mac System
+Download TCGAplot from the link:
+[https://drive.google.com/drive/folders/1CU95aGXMW6P8FrxPaJU7F6WBRE9NigVy?usp=drive_link](https://drive.google.com/drive/folders/1CU95aGXMW6P8FrxPaJU7F6WBRE9NigVy?usp=drive_link) 
+
+Run
+```r
+install.packages(c("devtools", "usethis", "roxygen2"))
+devtools::build()
+```
+
+Then, install the TCGAplot locally as the mentioned method for Windows system.
 
 There were several dependent R packages, and users could install these dependent R packages using the following codes before the installation of TCGAplot.
 
